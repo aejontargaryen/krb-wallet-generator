@@ -65,6 +65,72 @@
 
 //---------------------------------------------------------------------
 // QRCode for JavaScript
+
+
+
+
+/*
+ JavaScript BigInteger library version 0.9
+ http://silentmatt.com/biginteger/
+
+ Copyright (c) 2009 Matthew Crumley <email@matthewcrumley.com>
+ Copyright (c) 2010,2011 by John Tobey <John.Tobey@gmail.com>
+ Licensed under the MIT license.
+
+ Support for arbitrary internal representation base was added by
+ Vitaly Magerya.
+ */
+
+// Copyright (c) 2014-2015, MyMonero.com
+//
+// All rights reserved.
+//
+// Redistribution and use in source and binary forms, with or without modification, are
+// permitted provided that the following conditions are met:
+//
+// 1. Redistributions of source code must retain the above copyright notice, this list of
+//    conditions and the following disclaimer.
+//
+// 2. Redistributions in binary form must reproduce the above copyright notice, this list
+//    of conditions and the following disclaimer in the documentation and/or other
+//    materials provided with the distribution.
+//
+// 3. Neither the name of the copyright holder nor the names of its contributors may be
+//    used to endorse or promote products derived from this software without specific
+//    prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
+// EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+// MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
+// THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+// PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+// INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+// STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
+// THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+// Original Author: Lucas Jones
+
+        /*!
+ * Waves v0.6.0
+ * http://fian.my.id/Waves
+ *
+ * Copyright 2014 Alfiana E. Sibuea and other contributors
+ * Released under the MIT license
+ * https://github.com/fians/Waves/blob/master/LICENSE
+ */
+
+        /*
+    @license
+    Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
+    This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+    The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+    The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+    Code distributed by Google as part of the polymer project is also
+    subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+ */
+
+// QRCode for JavaScript
 //
 // Copyright (c) 2009 Kazuhiko Arase
 //
@@ -76,8 +142,7 @@
 // The word "QR Code" is registered trademark of
 // DENSO WAVE INCORPORATED
 // http://www.denso-wave.com/qrcode/faqpatent-e.html
-//
-//---------------------------------------------------------------------
+
 
 /*
  * js-sha3 v0.5.1
@@ -91,70 +156,11 @@
 
 /* Wallet generator modifications: Copyright 2015 moneromooo */
 
--->
-
-
 
 var JSBigInt = (function () {
     "use strict";
-    /*
-     Class: BigInteger
-     An arbitrarily-large integer.
 
-     <BigInteger> objects should be considered immutable. None of the "built-in"
-     methods modify *this* or their arguments. All properties should be
-     considered private.
-
-     All the methods of <BigInteger> instances can be called "statically". The
-     static versions are convenient if you don't already have a <BigInteger>
-     object.
-
-     As an example, these calls are equivalent.
-
-     > BigInteger(4).multiply(5); // returns BigInteger(20);
-     > BigInteger.multiply(4, 5); // returns BigInteger(20);
-
-     > var a = 42;
-     > var a = BigInteger.toJSValue("0b101010"); // Not completely useless...
-     */
-
-    var CONSTRUCT = {}; // Unique token to call "private" version of constructor
-
-    /*
-     Constructor: BigInteger()
-     Convert a value to a <BigInteger>.
-
-     Although <BigInteger()> is the constructor for <BigInteger> objects, it is
-     best not to call it as a constructor. If *n* is a <BigInteger> object, it is
-     simply returned as-is. Otherwise, <BigInteger()> is equivalent to <parse>
-     without a radix argument.
-
-     > var n0 = BigInteger();      // Same as <BigInteger.ZERO>
-     > var n1 = BigInteger("123"); // Create a new <BigInteger> with value 123
-     > var n2 = BigInteger(123);   // Create a new <BigInteger> with value 123
-     > var n3 = BigInteger(n2);    // Return n2, unchanged
-
-     The constructor form only takes an array and a sign. *n* must be an
-     array of numbers in little-endian order, where each digit is between 0
-     and BigInteger.base.  The second parameter sets the sign: -1 for
-     negative, +1 for positive, or 0 for zero. The array is *not copied and
-     may be modified*. If the array contains only zeros, the sign parameter
-     is ignored and is forced to zero.
-
-     > new BigInteger([5], -1): create a new BigInteger with value -5
-
-     Parameters:
-
-     n - Value to convert to a <BigInteger>.
-
-     Returns:
-
-     A <BigInteger> value.
-
-     See Also:
-
-     <parse>, <BigInteger>
-     */
+    var CONSTRUCT = {};
     function BigInteger(n, s, token) {
         if (token !== CONSTRUCT) {
             if (n instanceof BigInteger) {
@@ -209,17 +215,7 @@ var JSBigInt = (function () {
     // Shortcut for <ONE>.
     BigInteger._1 = ONE;
 
-    /*
-     Constant: small
-     Array of <BigIntegers> from 0 to 36.
 
-     These are used internally for parsing, but useful when you need a "small"
-     <BigInteger>.
-
-     See Also:
-
-     <ZERO>, <ONE>, <_0>, <_1>
-     */
     BigInteger.small = [
         ZERO,
         ONE,
@@ -264,21 +260,6 @@ var JSBigInt = (function () {
     // Used for parsing/radix conversion
     BigInteger.digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
-    /*
-     Method: toString
-     Convert a <BigInteger> to a string.
-
-     When *base* is greater than 10, letters are upper case.
-
-     Parameters:
-
-     base - Optional base to represent the number in (default is base 10).
-     Must be between 2 and 36 inclusive, or an Error will be thrown.
-
-     Returns:
-
-     The string representation of the <BigInteger>.
-     */
     BigInteger.prototype.toString = function (base) {
         base = +base || 10;
         if (base < 2 || base > 36) {
@@ -358,43 +339,8 @@ var JSBigInt = (function () {
         /^[0-9a-zA-Z]*$/
     ];
 
-    /*
-     Function: parse
-     Parse a string into a <BigInteger>.
-
-     *base* is optional but, if provided, must be from 2 to 36 inclusive. If
-     *base* is not provided, it will be guessed based on the leading characters
-     of *s* as follows:
-
-     - "0x" or "0X": *base* = 16
-     - "0c" or "0C": *base* = 8
-     - "0b" or "0B": *base* = 2
-     - else: *base* = 10
-
-     If no base is provided, or *base* is 10, the number can be in exponential
-     form. For example, these are all valid:
-
-     > BigInteger.parse("1e9");              // Same as "1000000000"
-     > BigInteger.parse("1.234*10^3");       // Same as 1234
-     > BigInteger.parse("56789 * 10 ** -2"); // Same as 567
-
-     If any characters fall outside the range defined by the radix, an exception
-     will be thrown.
-
-     Parameters:
-
-     s - The string to parse.
-     base - Optional radix (default is to guess based on *s*).
-
-     Returns:
-
-     a <BigInteger> instance.
-     */
     BigInteger.parse = function (s, base) {
-        // Expands a number in exponential form to decimal form.
-        // expandExponential("-13.441*10^5") === "1344100";
-        // expandExponential("1.12300e-1") === "0.112300";
-        // expandExponential(1000000000000000000000000000000) === "1000000000000000000000000000000";
+
         function expandExponential(str) {
             str = str.replace(/\s*[*xX]\s*10\s*(\^|\*\*)\s*/, "e");
 
@@ -487,22 +433,7 @@ var JSBigInt = (function () {
         }
     };
 
-    /*
-     Function: add
-     Add two <BigIntegers>.
 
-     Parameters:
-
-     n - The number to add to *this*. Will be converted to a <BigInteger>.
-
-     Returns:
-
-     The numbers added together.
-
-     See Also:
-
-     <subtract>, <multiply>, <quotient>, <next>
-     */
     BigInteger.prototype.add = function (n) {
         if (this._s === 0) {
             return BigInteger(n);
@@ -551,54 +482,16 @@ var JSBigInt = (function () {
         return new BigInteger(sum, this._s, CONSTRUCT);
     };
 
-    /*
-     Function: negate
-     Get the additive inverse of a <BigInteger>.
 
-     Returns:
-
-     A <BigInteger> with the same magnatude, but with the opposite sign.
-
-     See Also:
-
-     <abs>
-     */
     BigInteger.prototype.negate = function () {
         return new BigInteger(this._d, (-this._s) | 0, CONSTRUCT);
     };
 
-    /*
-     Function: abs
-     Get the absolute value of a <BigInteger>.
 
-     Returns:
-
-     A <BigInteger> with the same magnatude, but always positive (or zero).
-
-     See Also:
-
-     <negate>
-     */
     BigInteger.prototype.abs = function () {
         return (this._s < 0) ? this.negate() : this;
     };
 
-    /*
-     Function: subtract
-     Subtract two <BigIntegers>.
-
-     Parameters:
-
-     n - The number to subtract from *this*. Will be converted to a <BigInteger>.
-
-     Returns:
-
-     The *n* subtracted from *this*.
-
-     See Also:
-
-     <add>, <multiply>, <quotient>, <prev>
-     */
     BigInteger.prototype.subtract = function (n) {
         if (this._s === 0) {
             return BigInteger(n).negate();
@@ -707,18 +600,7 @@ var JSBigInt = (function () {
             return new BigInteger(sum, sign, CONSTRUCT);
         }
 
-        /*
-         Function: next
-         Get the next <BigInteger> (add one).
 
-         Returns:
-
-         *this* + 1.
-
-         See Also:
-
-         <add>, <prev>
-         */
         BigInteger.prototype.next = function () {
             switch (this._s) {
             case 0:
@@ -731,18 +613,7 @@ var JSBigInt = (function () {
             }
         };
 
-        /*
-         Function: prev
-         Get the previous <BigInteger> (subtract one).
 
-         Returns:
-
-         *this* - 1.
-
-         See Also:
-
-         <next>, <subtract>
-         */
         BigInteger.prototype.prev = function () {
             switch (this._s) {
             case 0:
@@ -756,24 +627,7 @@ var JSBigInt = (function () {
         };
     })();
 
-    /*
-     Function: compareAbs
-     Compare the absolute value of two <BigIntegers>.
 
-     Calling <compareAbs> is faster than calling <abs> twice, then <compare>.
-
-     Parameters:
-
-     n - The number to compare to *this*. Will be converted to a <BigInteger>.
-
-     Returns:
-
-     -1, 0, or +1 if *|this|* is less than, equal to, or greater than *|n|*.
-
-     See Also:
-
-     <compare>, <abs>
-     */
     BigInteger.prototype.compareAbs = function (n) {
         if (this === n) {
             return 0;
@@ -812,22 +666,6 @@ var JSBigInt = (function () {
         return 0;
     };
 
-    /*
-     Function: compare
-     Compare two <BigIntegers>.
-
-     Parameters:
-
-     n - The number to compare to *this*. Will be converted to a <BigInteger>.
-
-     Returns:
-
-     -1, 0, or +1 if *this* is less than, equal to, or greater than *n*.
-
-     See Also:
-
-     <compareAbs>, <isPositive>, <isNegative>, <isUnit>
-     */
     BigInteger.prototype.compare = function (n) {
         if (this === n) {
             return 0;
@@ -847,42 +685,14 @@ var JSBigInt = (function () {
         }
     };
 
-    /*
-     Function: isUnit
-     Return true iff *this* is either 1 or -1.
 
-     Returns:
-
-     true if *this* compares equal to <BigInteger.ONE> or <BigInteger.M_ONE>.
-
-     See Also:
-
-     <isZero>, <isNegative>, <isPositive>, <compareAbs>, <compare>,
-     <BigInteger.ONE>, <BigInteger.M_ONE>
-     */
     BigInteger.prototype.isUnit = function () {
         return this === ONE ||
             this === M_ONE ||
             (this._d.length === 1 && this._d[0] === 1);
     };
 
-    /*
-     Function: multiply
-     Multiply two <BigIntegers>.
 
-     Parameters:
-
-     n - The number to multiply *this* by. Will be converted to a
-     <BigInteger>.
-
-     Returns:
-
-     The numbers multiplied together.
-
-     See Also:
-
-     <add>, <subtract>, <quotient>, <square>
-     */
     BigInteger.prototype.multiply = function (n) {
         // TODO: Consider adding Karatsuba multiplication for large numbers
         if (this._s === 0) {
@@ -941,9 +751,7 @@ var JSBigInt = (function () {
         return new BigInteger(partial, this._s * n._s, CONSTRUCT);
     };
 
-    // Multiply a BigInteger by a single-digit native number
-    // Assumes that this and n are >= 0
-    // This is not really intended to be used outside the library itself
+
     BigInteger.prototype.multiplySingleDigit = function (n) {
         if (n === 0 || this._s === 0) {
             return ZERO;
@@ -991,25 +799,8 @@ var JSBigInt = (function () {
         return new BigInteger(partial, 1, CONSTRUCT);
     };
 
-    /*
-     Function: square
-     Multiply a <BigInteger> by itself.
 
-     This is slightly faster than regular multiplication, since it removes the
-     duplicated multiplcations.
-
-     Returns:
-
-     > this.multiply(this)
-
-     See Also:
-     <multiply>
-     */
     BigInteger.prototype.square = function () {
-        // Normally, squaring a 10-digit number would take 100 multiplications.
-        // Of these 10 are unique diagonals, of the remaining 90 (100-10), 45 are repeated.
-        // This procedure saves (N*(N-1))/2 multiplications, (e.g., 45 of 100 multiplies).
-        // Based on code by Gary Darby, Intellitech Systems Inc., www.DelphiForFun.org
 
         if (this._s === 0) {
             return ZERO;
@@ -1052,83 +843,18 @@ var JSBigInt = (function () {
         return new BigInteger(imult1, 1, CONSTRUCT);
     };
 
-    /*
-     Function: quotient
-     Divide two <BigIntegers> and truncate towards zero.
-
-     <quotient> throws an exception if *n* is zero.
-
-     Parameters:
-
-     n - The number to divide *this* by. Will be converted to a <BigInteger>.
-
-     Returns:
-
-     The *this* / *n*, truncated to an integer.
-
-     See Also:
-
-     <add>, <subtract>, <multiply>, <divRem>, <remainder>
-     */
     BigInteger.prototype.quotient = function (n) {
         return this.divRem(n)[0];
     };
 
-    /*
-     Function: divide
-     Deprecated synonym for <quotient>.
-     */
+
     BigInteger.prototype.divide = BigInteger.prototype.quotient;
 
-    /*
-     Function: remainder
-     Calculate the remainder of two <BigIntegers>.
 
-     <remainder> throws an exception if *n* is zero.
-
-     Parameters:
-
-     n - The remainder after *this* is divided *this* by *n*. Will be
-     converted to a <BigInteger>.
-
-     Returns:
-
-     *this* % *n*.
-
-     See Also:
-
-     <divRem>, <quotient>
-     */
     BigInteger.prototype.remainder = function (n) {
         return this.divRem(n)[1];
     };
 
-    /*
-     Function: divRem
-     Calculate the integer quotient and remainder of two <BigIntegers>.
-
-     <divRem> throws an exception if *n* is zero.
-
-     Parameters:
-
-     n - The number to divide *this* by. Will be converted to a <BigInteger>.
-
-     Returns:
-
-     A two-element array containing the quotient and the remainder.
-
-     > a.divRem(b)
-
-     is exactly equivalent to
-
-     > [a.quotient(b), a.remainder(b)]
-
-     except it is faster, because they are calculated at the same time.
-
-     See Also:
-
-     <quotient>, <remainder>
-     */
     BigInteger.prototype.divRem = function (n) {
         n = BigInteger(n);
         if (n._s === 0) {
@@ -1970,10 +1696,10 @@ return{_strlen:lb,_ge_mul8:Va,_keccak:db,_ge_scalarmult:Ta,_ge_fromfe_frombytes_
 var salt = '4721283fee2db41e1f2fc50ea9f6d783'; // IMPORTANT: never change it, otherwise it will be impossible to restore previously generated wallets!
 var config = {
     coinUnitPlaces: 12,
-    coinSymbol: 'KRB',
-    coinName: 'Karbowanec',
-    coinUriPrefix: 'karbowanec:',
-    addressPrefix: 111
+    coinSymbol: 'TRTL',
+    coinName: 'TurtleCoin',
+    coinUriPrefix: 'turtlecoin:',
+    addressPrefix: 3914525
 };
 var cnUtil = (function(initConfig) {
     //var config = $.extend({}, initConfig);
@@ -2169,14 +1895,14 @@ var cnUtil = (function(initConfig) {
         var second = this.keccak(first, 32, 32);
         keys.view = this.generate_keys(second);
         keys.public_addr = this.pubkeys_to_string(keys.spend.pub, keys.view.pub);
-	
+
 	var prefix = this.encode_varint(CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX);
   	var privateKeyBase = prefix + keys.spend.pub + keys.view.pub + keys.spend.sec + keys.view.sec; // Karbowanec privateKeyBase
     var checksum = this.cn_fast_hash(privateKeyBase).slice(0, ADDRESS_CHECKSUM_SIZE * 2);
-    
+
 	keys.privateKeys = cnBase58.encode(privateKeyBase + checksum);
-		
-		
+
+
         return keys;
     };
 
@@ -2198,17 +1924,17 @@ var cnUtil = (function(initConfig) {
         keys.view = this.generate_keys(second);
         keys.public_addr = this.pubkeys_to_string(keys.spend.pub, keys.view.pub);
 
-		
-	
+
+
 	var prefix = this.encode_varint(CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX);
   	var privateKeyBase = prefix + keys.spend.pub + keys.view.pub + keys.spend.sec + keys.view.sec; // Karbowanec privateKeyBase
     var checksum = this.cn_fast_hash(privateKeyBase).slice(0, ADDRESS_CHECKSUM_SIZE * 2);
-    
+
 	keys.privateKeys = cnBase58.encode(privateKeyBase + checksum);
-	
-	
-	
-		
+
+
+
+
         return keys;
     };
 
@@ -3617,7 +3343,7 @@ var mn_words = {
     }
 })();
 
-var QRCode;!function(){function a(a){this.mode=c.MODE_8BIT_BYTE,this.data=a,this.parsedData=[];for(var b=[],d=0,e=this.data.length;e>d;d++){var f=this.data.charCodeAt(d);f>65536?(b[0]=240|(1835008&f)>>>18,b[1]=128|(258048&f)>>>12,b[2]=128|(4032&f)>>>6,b[3]=128|63&f):f>2048?(b[0]=224|(61440&f)>>>12,b[1]=128|(4032&f)>>>6,b[2]=128|63&f):f>128?(b[0]=192|(1984&f)>>>6,b[1]=128|63&f):b[0]=f,this.parsedData=this.parsedData.concat(b)}this.parsedData.length!=this.data.length&&(this.parsedData.unshift(191),this.parsedData.unshift(187),this.parsedData.unshift(239))}function b(a,b){this.typeNumber=a,this.errorCorrectLevel=b,this.modules=null,this.moduleCount=0,this.dataCache=null,this.dataList=[]}function i(a,b){if(void 0==a.length)throw new Error(a.length+"/"+b);for(var c=0;c<a.length&&0==a[c];)c++;this.num=new Array(a.length-c+b);for(var d=0;d<a.length-c;d++)this.num[d]=a[d+c]}function j(a,b){this.totalCount=a,this.dataCount=b}function k(){this.buffer=[],this.length=0}function m(){return"undefined"!=typeof CanvasRenderingContext2D}function n(){var a=!1,b=navigator.userAgent;return/android/i.test(b)&&(a=!0,aMat=b.toString().match(/android ([0-9]\.[0-9])/i),aMat&&aMat[1]&&(a=parseFloat(aMat[1]))),a}function r(a,b){for(var c=1,e=s(a),f=0,g=l.length;g>=f;f++){var h=0;switch(b){case d.L:h=l[f][0];break;case d.M:h=l[f][1];break;case d.Q:h=l[f][2];break;case d.H:h=l[f][3]}if(h>=e)break;c++}if(c>l.length)throw new Error("Too long data");return c}function s(a){var b=encodeURI(a).toString().replace(/\%[0-9a-fA-F]{2}/g,"a");return b.length+(b.length!=a?3:0)}a.prototype={getLength:function(){return this.parsedData.length},write:function(a){for(var b=0,c=this.parsedData.length;c>b;b++)a.put(this.parsedData[b],8)}},b.prototype={addData:function(b){var c=new a(b);this.dataList.push(c),this.dataCache=null},isDark:function(a,b){if(0>a||this.moduleCount<=a||0>b||this.moduleCount<=b)throw new Error(a+","+b);return this.modules[a][b]},getModuleCount:function(){return this.moduleCount},make:function(){this.makeImpl(!1,this.getBestMaskPattern())},makeImpl:function(a,c){this.moduleCount=4*this.typeNumber+17,this.modules=new Array(this.moduleCount);for(var d=0;d<this.moduleCount;d++){this.modules[d]=new Array(this.moduleCount);for(var e=0;e<this.moduleCount;e++)this.modules[d][e]=null}this.setupPositionProbePattern(0,0),this.setupPositionProbePattern(this.moduleCount-7,0),this.setupPositionProbePattern(0,this.moduleCount-7),this.setupPositionAdjustPattern(),this.setupTimingPattern(),this.setupTypeInfo(a,c),this.typeNumber>=7&&this.setupTypeNumber(a),null==this.dataCache&&(this.dataCache=b.createData(this.typeNumber,this.errorCorrectLevel,this.dataList)),this.mapData(this.dataCache,c)},setupPositionProbePattern:function(a,b){for(var c=-1;7>=c;c++)if(!(-1>=a+c||this.moduleCount<=a+c))for(var d=-1;7>=d;d++)-1>=b+d||this.moduleCount<=b+d||(this.modules[a+c][b+d]=c>=0&&6>=c&&(0==d||6==d)||d>=0&&6>=d&&(0==c||6==c)||c>=2&&4>=c&&d>=2&&4>=d?!0:!1)},getBestMaskPattern:function(){for(var a=0,b=0,c=0;8>c;c++){this.makeImpl(!0,c);var d=f.getLostPoint(this);(0==c||a>d)&&(a=d,b=c)}return b},createMovieClip:function(a,b,c){var d=a.createEmptyMovieClip(b,c),e=1;this.make();for(var f=0;f<this.modules.length;f++)for(var g=f*e,h=0;h<this.modules[f].length;h++){var i=h*e,j=this.modules[f][h];j&&(d.beginFill(0,100),d.moveTo(i,g),d.lineTo(i+e,g),d.lineTo(i+e,g+e),d.lineTo(i,g+e),d.endFill())}return d},setupTimingPattern:function(){for(var a=8;a<this.moduleCount-8;a++)null==this.modules[a][6]&&(this.modules[a][6]=0==a%2);for(var b=8;b<this.moduleCount-8;b++)null==this.modules[6][b]&&(this.modules[6][b]=0==b%2)},setupPositionAdjustPattern:function(){for(var a=f.getPatternPosition(this.typeNumber),b=0;b<a.length;b++)for(var c=0;c<a.length;c++){var d=a[b],e=a[c];if(null==this.modules[d][e])for(var g=-2;2>=g;g++)for(var h=-2;2>=h;h++)this.modules[d+g][e+h]=-2==g||2==g||-2==h||2==h||0==g&&0==h?!0:!1}},setupTypeNumber:function(a){for(var b=f.getBCHTypeNumber(this.typeNumber),c=0;18>c;c++){var d=!a&&1==(1&b>>c);this.modules[Math.floor(c/3)][c%3+this.moduleCount-8-3]=d}for(var c=0;18>c;c++){var d=!a&&1==(1&b>>c);this.modules[c%3+this.moduleCount-8-3][Math.floor(c/3)]=d}},setupTypeInfo:function(a,b){for(var c=this.errorCorrectLevel<<3|b,d=f.getBCHTypeInfo(c),e=0;15>e;e++){var g=!a&&1==(1&d>>e);6>e?this.modules[e][8]=g:8>e?this.modules[e+1][8]=g:this.modules[this.moduleCount-15+e][8]=g}for(var e=0;15>e;e++){var g=!a&&1==(1&d>>e);8>e?this.modules[8][this.moduleCount-e-1]=g:9>e?this.modules[8][15-e-1+1]=g:this.modules[8][15-e-1]=g}this.modules[this.moduleCount-8][8]=!a},mapData:function(a,b){for(var c=-1,d=this.moduleCount-1,e=7,g=0,h=this.moduleCount-1;h>0;h-=2)for(6==h&&h--;;){for(var i=0;2>i;i++)if(null==this.modules[d][h-i]){var j=!1;g<a.length&&(j=1==(1&a[g]>>>e));var k=f.getMask(b,d,h-i);k&&(j=!j),this.modules[d][h-i]=j,e--,-1==e&&(g++,e=7)}if(d+=c,0>d||this.moduleCount<=d){d-=c,c=-c;break}}}},b.PAD0=236,b.PAD1=17,b.createData=function(a,c,d){for(var e=j.getRSBlocks(a,c),g=new k,h=0;h<d.length;h++){var i=d[h];g.put(i.mode,4),g.put(i.getLength(),f.getLengthInBits(i.mode,a)),i.write(g)}for(var l=0,h=0;h<e.length;h++)l+=e[h].dataCount;if(g.getLengthInBits()>8*l)throw new Error("code length overflow. ("+g.getLengthInBits()+">"+8*l+")");for(g.getLengthInBits()+4<=8*l&&g.put(0,4);0!=g.getLengthInBits()%8;)g.putBit(!1);for(;;){if(g.getLengthInBits()>=8*l)break;if(g.put(b.PAD0,8),g.getLengthInBits()>=8*l)break;g.put(b.PAD1,8)}return b.createBytes(g,e)},b.createBytes=function(a,b){for(var c=0,d=0,e=0,g=new Array(b.length),h=new Array(b.length),j=0;j<b.length;j++){var k=b[j].dataCount,l=b[j].totalCount-k;d=Math.max(d,k),e=Math.max(e,l),g[j]=new Array(k);for(var m=0;m<g[j].length;m++)g[j][m]=255&a.buffer[m+c];c+=k;var n=f.getErrorCorrectPolynomial(l),o=new i(g[j],n.getLength()-1),p=o.mod(n);h[j]=new Array(n.getLength()-1);for(var m=0;m<h[j].length;m++){var q=m+p.getLength()-h[j].length;h[j][m]=q>=0?p.get(q):0}}for(var r=0,m=0;m<b.length;m++)r+=b[m].totalCount;for(var s=new Array(r),t=0,m=0;d>m;m++)for(var j=0;j<b.length;j++)m<g[j].length&&(s[t++]=g[j][m]);for(var m=0;e>m;m++)for(var j=0;j<b.length;j++)m<h[j].length&&(s[t++]=h[j][m]);return s};for(var c={MODE_NUMBER:1,MODE_ALPHA_NUM:2,MODE_8BIT_BYTE:4,MODE_KANJI:8},d={L:1,M:0,Q:3,H:2},e={PATTERN000:0,PATTERN001:1,PATTERN010:2,PATTERN011:3,PATTERN100:4,PATTERN101:5,PATTERN110:6,PATTERN111:7},f={PATTERN_POSITION_TABLE:[[],[6,18],[6,22],[6,26],[6,30],[6,34],[6,22,38],[6,24,42],[6,26,46],[6,28,50],[6,30,54],[6,32,58],[6,34,62],[6,26,46,66],[6,26,48,70],[6,26,50,74],[6,30,54,78],[6,30,56,82],[6,30,58,86],[6,34,62,90],[6,28,50,72,94],[6,26,50,74,98],[6,30,54,78,102],[6,28,54,80,106],[6,32,58,84,110],[6,30,58,86,114],[6,34,62,90,118],[6,26,50,74,98,122],[6,30,54,78,102,126],[6,26,52,78,104,130],[6,30,56,82,108,134],[6,34,60,86,112,138],[6,30,58,86,114,142],[6,34,62,90,118,146],[6,30,54,78,102,126,150],[6,24,50,76,102,128,154],[6,28,54,80,106,132,158],[6,32,58,84,110,136,162],[6,26,54,82,110,138,166],[6,30,58,86,114,142,170]],G15:1335,G18:7973,G15_MASK:21522,getBCHTypeInfo:function(a){for(var b=a<<10;f.getBCHDigit(b)-f.getBCHDigit(f.G15)>=0;)b^=f.G15<<f.getBCHDigit(b)-f.getBCHDigit(f.G15);return(a<<10|b)^f.G15_MASK},getBCHTypeNumber:function(a){for(var b=a<<12;f.getBCHDigit(b)-f.getBCHDigit(f.G18)>=0;)b^=f.G18<<f.getBCHDigit(b)-f.getBCHDigit(f.G18);return a<<12|b},getBCHDigit:function(a){for(var b=0;0!=a;)b++,a>>>=1;return b},getPatternPosition:function(a){return f.PATTERN_POSITION_TABLE[a-1]},getMask:function(a,b,c){switch(a){case e.PATTERN000:return 0==(b+c)%2;case e.PATTERN001:return 0==b%2;case e.PATTERN010:return 0==c%3;case e.PATTERN011:return 0==(b+c)%3;case e.PATTERN100:return 0==(Math.floor(b/2)+Math.floor(c/3))%2;case e.PATTERN101:return 0==b*c%2+b*c%3;case e.PATTERN110:return 0==(b*c%2+b*c%3)%2;case e.PATTERN111:return 0==(b*c%3+(b+c)%2)%2;default:throw new Error("bad maskPattern:"+a)}},getErrorCorrectPolynomial:function(a){for(var b=new i([1],0),c=0;a>c;c++)b=b.multiply(new i([1,g.gexp(c)],0));return b},getLengthInBits:function(a,b){if(b>=1&&10>b)switch(a){case c.MODE_NUMBER:return 10;case c.MODE_ALPHA_NUM:return 9;case c.MODE_8BIT_BYTE:return 8;case c.MODE_KANJI:return 8;default:throw new Error("mode:"+a)}else if(27>b)switch(a){case c.MODE_NUMBER:return 12;case c.MODE_ALPHA_NUM:return 11;case c.MODE_8BIT_BYTE:return 16;case c.MODE_KANJI:return 10;default:throw new Error("mode:"+a)}else{if(!(41>b))throw new Error("type:"+b);switch(a){case c.MODE_NUMBER:return 14;case c.MODE_ALPHA_NUM:return 13;case c.MODE_8BIT_BYTE:return 16;case c.MODE_KANJI:return 12;default:throw new Error("mode:"+a)}}},getLostPoint:function(a){for(var b=a.getModuleCount(),c=0,d=0;b>d;d++)for(var e=0;b>e;e++){for(var f=0,g=a.isDark(d,e),h=-1;1>=h;h++)if(!(0>d+h||d+h>=b))for(var i=-1;1>=i;i++)0>e+i||e+i>=b||(0!=h||0!=i)&&g==a.isDark(d+h,e+i)&&f++;f>5&&(c+=3+f-5)}for(var d=0;b-1>d;d++)for(var e=0;b-1>e;e++){var j=0;a.isDark(d,e)&&j++,a.isDark(d+1,e)&&j++,a.isDark(d,e+1)&&j++,a.isDark(d+1,e+1)&&j++,(0==j||4==j)&&(c+=3)}for(var d=0;b>d;d++)for(var e=0;b-6>e;e++)a.isDark(d,e)&&!a.isDark(d,e+1)&&a.isDark(d,e+2)&&a.isDark(d,e+3)&&a.isDark(d,e+4)&&!a.isDark(d,e+5)&&a.isDark(d,e+6)&&(c+=40);for(var e=0;b>e;e++)for(var d=0;b-6>d;d++)a.isDark(d,e)&&!a.isDark(d+1,e)&&a.isDark(d+2,e)&&a.isDark(d+3,e)&&a.isDark(d+4,e)&&!a.isDark(d+5,e)&&a.isDark(d+6,e)&&(c+=40);for(var k=0,e=0;b>e;e++)for(var d=0;b>d;d++)a.isDark(d,e)&&k++;var l=Math.abs(100*k/b/b-50)/5;return c+=10*l}},g={glog:function(a){if(1>a)throw new Error("glog("+a+")");return g.LOG_TABLE[a]},gexp:function(a){for(;0>a;)a+=255;for(;a>=256;)a-=255;return g.EXP_TABLE[a]},EXP_TABLE:new Array(256),LOG_TABLE:new Array(256)},h=0;8>h;h++)g.EXP_TABLE[h]=1<<h;for(var h=8;256>h;h++)g.EXP_TABLE[h]=g.EXP_TABLE[h-4]^g.EXP_TABLE[h-5]^g.EXP_TABLE[h-6]^g.EXP_TABLE[h-8];for(var h=0;255>h;h++)g.LOG_TABLE[g.EXP_TABLE[h]]=h;i.prototype={get:function(a){return this.num[a]},getLength:function(){return this.num.length},multiply:function(a){for(var b=new Array(this.getLength()+a.getLength()-1),c=0;c<this.getLength();c++)for(var d=0;d<a.getLength();d++)b[c+d]^=g.gexp(g.glog(this.get(c))+g.glog(a.get(d)));return new i(b,0)},mod:function(a){if(this.getLength()-a.getLength()<0)return this;for(var b=g.glog(this.get(0))-g.glog(a.get(0)),c=new Array(this.getLength()),d=0;d<this.getLength();d++)c[d]=this.get(d);for(var d=0;d<a.getLength();d++)c[d]^=g.gexp(g.glog(a.get(d))+b);return new i(c,0).mod(a)}},j.RS_BLOCK_TABLE=[[1,26,19],[1,26,16],[1,26,13],[1,26,9],[1,44,34],[1,44,28],[1,44,22],[1,44,16],[1,70,55],[1,70,44],[2,35,17],[2,35,13],[1,100,80],[2,50,32],[2,50,24],[4,25,9],[1,134,108],[2,67,43],[2,33,15,2,34,16],[2,33,11,2,34,12],[2,86,68],[4,43,27],[4,43,19],[4,43,15],[2,98,78],[4,49,31],[2,32,14,4,33,15],[4,39,13,1,40,14],[2,121,97],[2,60,38,2,61,39],[4,40,18,2,41,19],[4,40,14,2,41,15],[2,146,116],[3,58,36,2,59,37],[4,36,16,4,37,17],[4,36,12,4,37,13],[2,86,68,2,87,69],[4,69,43,1,70,44],[6,43,19,2,44,20],[6,43,15,2,44,16],[4,101,81],[1,80,50,4,81,51],[4,50,22,4,51,23],[3,36,12,8,37,13],[2,116,92,2,117,93],[6,58,36,2,59,37],[4,46,20,6,47,21],[7,42,14,4,43,15],[4,133,107],[8,59,37,1,60,38],[8,44,20,4,45,21],[12,33,11,4,34,12],[3,145,115,1,146,116],[4,64,40,5,65,41],[11,36,16,5,37,17],[11,36,12,5,37,13],[5,109,87,1,110,88],[5,65,41,5,66,42],[5,54,24,7,55,25],[11,36,12],[5,122,98,1,123,99],[7,73,45,3,74,46],[15,43,19,2,44,20],[3,45,15,13,46,16],[1,135,107,5,136,108],[10,74,46,1,75,47],[1,50,22,15,51,23],[2,42,14,17,43,15],[5,150,120,1,151,121],[9,69,43,4,70,44],[17,50,22,1,51,23],[2,42,14,19,43,15],[3,141,113,4,142,114],[3,70,44,11,71,45],[17,47,21,4,48,22],[9,39,13,16,40,14],[3,135,107,5,136,108],[3,67,41,13,68,42],[15,54,24,5,55,25],[15,43,15,10,44,16],[4,144,116,4,145,117],[17,68,42],[17,50,22,6,51,23],[19,46,16,6,47,17],[2,139,111,7,140,112],[17,74,46],[7,54,24,16,55,25],[34,37,13],[4,151,121,5,152,122],[4,75,47,14,76,48],[11,54,24,14,55,25],[16,45,15,14,46,16],[6,147,117,4,148,118],[6,73,45,14,74,46],[11,54,24,16,55,25],[30,46,16,2,47,17],[8,132,106,4,133,107],[8,75,47,13,76,48],[7,54,24,22,55,25],[22,45,15,13,46,16],[10,142,114,2,143,115],[19,74,46,4,75,47],[28,50,22,6,51,23],[33,46,16,4,47,17],[8,152,122,4,153,123],[22,73,45,3,74,46],[8,53,23,26,54,24],[12,45,15,28,46,16],[3,147,117,10,148,118],[3,73,45,23,74,46],[4,54,24,31,55,25],[11,45,15,31,46,16],[7,146,116,7,147,117],[21,73,45,7,74,46],[1,53,23,37,54,24],[19,45,15,26,46,16],[5,145,115,10,146,116],[19,75,47,10,76,48],[15,54,24,25,55,25],[23,45,15,25,46,16],[13,145,115,3,146,116],[2,74,46,29,75,47],[42,54,24,1,55,25],[23,45,15,28,46,16],[17,145,115],[10,74,46,23,75,47],[10,54,24,35,55,25],[19,45,15,35,46,16],[17,145,115,1,146,116],[14,74,46,21,75,47],[29,54,24,19,55,25],[11,45,15,46,46,16],[13,145,115,6,146,116],[14,74,46,23,75,47],[44,54,24,7,55,25],[59,46,16,1,47,17],[12,151,121,7,152,122],[12,75,47,26,76,48],[39,54,24,14,55,25],[22,45,15,41,46,16],[6,151,121,14,152,122],[6,75,47,34,76,48],[46,54,24,10,55,25],[2,45,15,64,46,16],[17,152,122,4,153,123],[29,74,46,14,75,47],[49,54,24,10,55,25],[24,45,15,46,46,16],[4,152,122,18,153,123],[13,74,46,32,75,47],[48,54,24,14,55,25],[42,45,15,32,46,16],[20,147,117,4,148,118],[40,75,47,7,76,48],[43,54,24,22,55,25],[10,45,15,67,46,16],[19,148,118,6,149,119],[18,75,47,31,76,48],[34,54,24,34,55,25],[20,45,15,61,46,16]],j.getRSBlocks=function(a,b){var c=j.getRsBlockTable(a,b);if(void 0==c)throw new Error("bad rs block @ typeNumber:"+a+"/errorCorrectLevel:"+b);for(var d=c.length/3,e=[],f=0;d>f;f++)for(var g=c[3*f+0],h=c[3*f+1],i=c[3*f+2],k=0;g>k;k++)e.push(new j(h,i));return e},j.getRsBlockTable=function(a,b){switch(b){case d.L:return j.RS_BLOCK_TABLE[4*(a-1)+0];case d.M:return j.RS_BLOCK_TABLE[4*(a-1)+1];case d.Q:return j.RS_BLOCK_TABLE[4*(a-1)+2];case d.H:return j.RS_BLOCK_TABLE[4*(a-1)+3];default:return void 0}},k.prototype={get:function(a){var b=Math.floor(a/8);return 1==(1&this.buffer[b]>>>7-a%8)},put:function(a,b){for(var c=0;b>c;c++)this.putBit(1==(1&a>>>b-c-1))},getLengthInBits:function(){return this.length},putBit:function(a){var b=Math.floor(this.length/8);this.buffer.length<=b&&this.buffer.push(0),a&&(this.buffer[b]|=128>>>this.length%8),this.length++}};var l=[[17,14,11,7],[32,26,20,14],[53,42,32,24],[78,62,46,34],[106,84,60,44],[134,106,74,58],[154,122,86,64],[192,152,108,84],[230,180,130,98],[271,213,151,119],[321,251,177,137],[367,287,203,155],[425,331,241,177],[458,362,258,194],[520,412,292,220],[586,450,322,250],[644,504,364,280],[718,560,394,310],[792,624,442,338],[858,666,482,382],[929,711,509,403],[1003,779,565,439],[1091,857,611,461],[1171,911,661,511],[1273,997,715,535],[1367,1059,751,593],[1465,1125,805,625],[1528,1190,868,658],[1628,1264,908,698],[1732,1370,982,742],[1840,1452,1030,790],[1952,1538,1112,842],[2068,1628,1168,898],[2188,1722,1228,958],[2303,1809,1283,983],[2431,1911,1351,1051],[2563,1989,1423,1093],[2699,2099,1499,1139],[2809,2213,1579,1219],[2953,2331,1663,1273]],o=function(){var a=function(a,b){this._el=a,this._htOption=b};return a.prototype.draw=function(a){function g(a,b){var c=document.createElementNS("http://www.w3.org/2000/svg",a);for(var d in b)b.hasOwnProperty(d)&&c.setAttribute(d,b[d]);return c}var b=this._htOption,c=this._el,d=a.getModuleCount();Math.floor(b.width/d),Math.floor(b.height/d),this.clear();var h=g("svg",{viewBox:"0 0 "+String(d)+" "+String(d),width:"100%",height:"100%",fill:b.colorLight});h.setAttributeNS("http://www.w3.org/2000/xmlns/","xmlns:xlink","http://www.w3.org/1999/xlink"),c.appendChild(h),h.appendChild(g("rect",{fill:b.colorDark,width:"1",height:"1",id:"template"}));for(var i=0;d>i;i++)for(var j=0;d>j;j++)if(a.isDark(i,j)){var k=g("use",{x:String(i),y:String(j)});k.setAttributeNS("http://www.w3.org/1999/xlink","href","#template"),h.appendChild(k)}},a.prototype.clear=function(){for(;this._el.hasChildNodes();)this._el.removeChild(this._el.lastChild)},a}(),p="svg"===document.documentElement.tagName.toLowerCase(),q=p?o:m()?function(){function a(){this._elImage.src=this._elCanvas.toDataURL("image/png"),this._elImage.style.display="block",this._elCanvas.style.display="none"}function d(a,b){var c=this;if(c._fFail=b,c._fSuccess=a,null===c._bSupportDataURI){var d=document.createElement("img"),e=function(){c._bSupportDataURI=!1,c._fFail&&_fFail.call(c)},f=function(){c._bSupportDataURI=!0,c._fSuccess&&c._fSuccess.call(c)};return d.onabort=e,d.onerror=e,d.onload=f,d.src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==",void 0}c._bSupportDataURI===!0&&c._fSuccess?c._fSuccess.call(c):c._bSupportDataURI===!1&&c._fFail&&c._fFail.call(c)}if(this._android&&this._android<=2.1){var b=1/window.devicePixelRatio,c=CanvasRenderingContext2D.prototype.drawImage;CanvasRenderingContext2D.prototype.drawImage=function(a,d,e,f,g,h,i,j){if("nodeName"in a&&/img/i.test(a.nodeName))for(var l=arguments.length-1;l>=1;l--)arguments[l]=arguments[l]*b;else"undefined"==typeof j&&(arguments[1]*=b,arguments[2]*=b,arguments[3]*=b,arguments[4]*=b);c.apply(this,arguments)}}var e=function(a,b){this._bIsPainted=!1,this._android=n(),this._htOption=b,this._elCanvas=document.createElement("canvas"),this._elCanvas.width=b.width,this._elCanvas.height=b.height,a.appendChild(this._elCanvas),this._el=a,this._oContext=this._elCanvas.getContext("2d"),this._bIsPainted=!1,this._elImage=document.createElement("img"),this._elImage.style.display="none",this._el.appendChild(this._elImage),this._bSupportDataURI=null};return e.prototype.draw=function(a){var b=this._elImage,c=this._oContext,d=this._htOption,e=a.getModuleCount(),f=d.width/e,g=d.height/e,h=Math.round(f),i=Math.round(g);b.style.display="none",this.clear();for(var j=0;e>j;j++)for(var k=0;e>k;k++){var l=a.isDark(j,k),m=k*f,n=j*g;c.strokeStyle=l?d.colorDark:d.colorLight,c.lineWidth=1,c.fillStyle=l?d.colorDark:d.colorLight,c.fillRect(m,n,f,g),c.strokeRect(Math.floor(m)+.5,Math.floor(n)+.5,h,i),c.strokeRect(Math.ceil(m)-.5,Math.ceil(n)-.5,h,i)}this._bIsPainted=!0},e.prototype.makeImage=function(){this._bIsPainted&&d.call(this,a)},e.prototype.isPainted=function(){return this._bIsPainted},e.prototype.clear=function(){this._oContext.clearRect(0,0,this._elCanvas.width,this._elCanvas.height),this._bIsPainted=!1},e.prototype.round=function(a){return a?Math.floor(1e3*a)/1e3:a},e}():function(){var a=function(a,b){this._el=a,this._htOption=b};return a.prototype.draw=function(a){for(var b=this._htOption,c=this._el,d=a.getModuleCount(),e=Math.floor(b.width/d),f=Math.floor(b.height/d),g=['<table style="border:0;border-collapse:collapse;">'],h=0;d>h;h++){g.push("<tr>");for(var i=0;d>i;i++)g.push('<td style="border:0;border-collapse:collapse;padding:0;margin:0;width:'+e+"px;height:"+f+"px;background-color:"+(a.isDark(h,i)?b.colorDark:b.colorLight)+';"></td>');g.push("</tr>")}g.push("</table>"),c.innerHTML=g.join("");var j=c.childNodes[0],k=(b.width-j.offsetWidth)/2,l=(b.height-j.offsetHeight)/2;k>0&&l>0&&(j.style.margin=l+"px "+k+"px")},a.prototype.clear=function(){this._el.innerHTML=""},a}();QRCode=function(a,b){if(this._htOption={width:256,height:256,typeNumber:4,colorDark:"#000000",colorLight:"#ffffff",correctLevel:d.H},"string"==typeof b&&(b={text:b}),b)for(var c in b)this._htOption[c]=b[c];"string"==typeof a&&(a=document.getElementById(a)),this._android=n(),this._el=a,this._oQRCode=null,this._oDrawing=new q(this._el,this._htOption),this._htOption.text&&this.makeCode(this._htOption.text)},QRCode.prototype.makeCode=function(a){this._oQRCode=new b(r(a,this._htOption.correctLevel),this._htOption.correctLevel),this._oQRCode.addData(a),this._oQRCode.make(),this._el.title=a,this._oDrawing.draw(this._oQRCode),this.makeImage()},QRCode.prototype.makeImage=function(){"function"==typeof this._oDrawing.makeImage&&(!this._android||this._android>=3)&&this._oDrawing.makeImage()},QRCode.prototype.clear=function(){this._oDrawing.clear()},QRCode.CorrectLevel=d}();
+var QRCode;!function(){function a(a){this.mode=c.MODE_8BIT_BYTE,this.data=a,this.parsedData=[];for(var b=[],d=0,e=this.data.length;e>d;d++){var f=this.data.charCodeAt(d);f>65536?(b[0]=240|(1835008&f)>>>18,b[1]=128|(258048&f)>>>12,b[2]=128|(4032&f)>>>6,b[3]=128|63&f):f>2048?(b[0]=224|(61440&f)>>>12,b[1]=128|(4032&f)>>>6,b[2]=128|63&f):f>128?(b[0]=192|(1984&f)>>>6,b[1]=128|63&f):b[0]=f,this.parsedData=this.parsedData.concat(b)}this.parsedData.length!=this.data.length&&(this.parsedData.unshift(191),this.parsedData.unshift(187),this.parsedData.unshift(239))}function b(a,b){this.typeNumber=a,this.errorCorrectLevel=b,this.modules=null,this.moduleCount=0,this.dataCache=null,this.dataList=[]}function i(a,b){if(void 0==a.length)throw new Error(a.length+"/"+b);for(var c=0;c<a.length&&0==a[c];)c++;this.num=new Array(a.length-c+b);for(var d=0;d<a.length-c;d++)this.num[d]=a[d+c]}function j(a,b){this.totalCount=a,this.dataCount=b}function k(){this.buffer=[],this.length=0}function m(){return"undefined"!=typeof CanvasRenderingContext2D}function n(){var a=!1,b=navigator.userAgent;return/android/i.test(b)&&(a=!0,aMat=b.toString().match(/android ([0-9]\.[0-9])/i),aMat&&aMat[1]&&(a=parseFloat(aMat[1]))),a}function r(a,b){for(var c=1,e=s(a),f=0,g=l.length;g>=f;f++){var h=0;switch(b){case d.L:h=l[f][0];break;case d.M:h=l[f][1];break;case d.Q:h=l[f][2];break;case d.H:h=l[f][3]}if(h>=e)break;c++}if(c>l.length)throw new Error("Too long data");return c}function s(a){var b=encodeURI(a).toString().replace(/\%[0-9a-fA-F]{2}/g,"a");return b.length+(b.length!=a?3:0)}a.prototype={getLength:function(){return this.parsedData.length},write:function(a){for(var b=0,c=this.parsedData.length;c>b;b++)a.put(this.parsedData[b],8)}},b.prototype={addData:function(b){var c=new a(b);this.dataList.push(c),this.dataCache=null},isDark:function(a,b){if(0>a||this.moduleCount<=a||0>b||this.moduleCount<=b)throw new Error(a+","+b);return this.modules[a][b]},getModuleCount:function(){return this.moduleCount},make:function(){this.makeImpl(!1,this.getBestMaskPattern())},makeImpl:function(a,c){this.moduleCount=4*this.typeNumber+17,this.modules=new Array(this.moduleCount);for(var d=0;d<this.moduleCount;d++){this.modules[d]=new Array(this.moduleCount);for(var e=0;e<this.moduleCount;e++)this.modules[d][e]=null}this.setupPositionProbePattern(0,0),this.setupPositionProbePattern(this.moduleCount-7,0),this.setupPositionProbePattern(0,this.moduleCount-7),this.setupPositionAdjustPattern(),this.setupTimingPattern(),this.setupTypeInfo(a,c),this.typeNumber>=7&&this.setupTypeNumber(a),null==this.dataCache&&(this.dataCache=b.createData(this.typeNumber,this.errorCorrectLevel,this.dataList)),this.mapData(this.dataCache,c)},setupPositionProbePattern:function(a,b){for(var c=-1;7>=c;c++)if(!(-1>=a+c||this.moduleCount<=a+c))for(var d=-1;7>=d;d++)-1>=b+d||this.moduleCount<=b+d||(this.modules[a+c][b+d]=c>=0&&6>=c&&(0==d||6==d)||d>=0&&6>=d&&(0==c||6==c)||c>=2&&4>=c&&d>=2&&4>=d?!0:!1)},getBestMaskPattern:function(){for(var a=0,b=0,c=0;8>c;c++){this.makeImpl(!0,c);var d=f.getLostPoint(this);(0==c||a>d)&&(a=d,b=c)}return b},createMovieClip:function(a,b,c){var d=a.createEmptyMovieClip(b,c),e=1;this.make();for(var f=0;f<this.modules.length;f++)for(var g=f*e,h=0;h<this.modules[f].length;h++){var i=h*e,j=this.modules[f][h];j&&(d.beginFill(0,100),d.moveTo(i,g),d.lineTo(i+e,g),d.lineTo(i+e,g+e),d.lineTo(i,g+e),d.endFill())}return d},setupTimingPattern:function(){for(var a=8;a<this.moduleCount-8;a++)null==this.modules[a][6]&&(this.modules[a][6]=0==a%2);for(var b=8;b<this.moduleCount-8;b++)null==this.modules[6][b]&&(this.modules[6][b]=0==b%2)},setupPositionAdjustPattern:function(){for(var a=f.getPatternPosition(this.typeNumber),b=0;b<a.length;b++)for(var c=0;c<a.length;c++){var d=a[b],e=a[c];if(null==this.modules[d][e])for(var g=-2;2>=g;g++)for(var h=-2;2>=h;h++)this.modules[d+g][e+h]=-2==g||2==g||-2==h||2==h||0==g&&0==h?!0:!1}},setupTypeNumber:function(a){for(var b=f.getBCHTypeNumber(this.typeNumber),c=0;18>c;c++){var d=!a&&1==(1&b>>c);this.modules[Math.floor(c/3)][c%3+this.moduleCount-8-3]=d}for(var c=0;18>c;c++){var d=!a&&1==(1&b>>c);this.modules[c%3+this.moduleCount-8-3][Math.floor(c/3)]=d}},setupTypeInfo:function(a,b){for(var c=this.errorCorrectLevel<<3|b,d=f.getBCHTypeInfo(c),e=0;15>e;e++){var g=!a&&1==(1&d>>e);6>e?this.modules[e][8]=g:8>e?this.modules[e+1][8]=g:this.modules[this.moduleCount-15+e][8]=g}for(var e=0;15>e;e++){var g=!a&&1==(1&d>>e);8>e?this.modules[8][this.moduleCount-e-1]=g:9>e?this.modules[8][15-e-1+1]=g:this.modules[8][15-e-1]=g}this.modules[this.moduleCount-8][8]=!a},mapData:function(a,b){for(var c=-1,d=this.moduleCount-1,e=7,g=0,h=this.moduleCount-1;h>0;h-=2)for(6==h&&h--;;){for(var i=0;2>i;i++)if(null==this.modules[d][h-i]){var j=!1;g<a.length&&(j=1==(1&a[g]>>>e));var k=f.getMask(b,d,h-i);k&&(j=!j),this.modules[d][h-i]=j,e--,-1==e&&(g++,e=7)}if(d+=c,0>d||this.moduleCount<=d){d-=c,c=-c;break}}}},b.PAD0=236,b.PAD1=17,b.createData=function(a,c,d){for(var e=j.getRSBlocks(a,c),g=new k,h=0;h<d.length;h++){var i=d[h];g.put(i.mode,4),g.put(i.getLength(),f.getLengthInBits(i.mode,a)),i.write(g)}for(var l=0,h=0;h<e.length;h++)l+=e[h].dataCount;if(g.getLengthInBits()>8*l)throw new Error("code length overflow. ("+g.getLengthInBits()+">"+8*l+")");for(g.getLengthInBits()+4<=8*l&&g.put(0,4);0!=g.getLengthInBits()%8;)g.putBit(!1);for(;;){if(g.getLengthInBits()>=8*l)break;if(g.put(b.PAD0,8),g.getLengthInBits()>=8*l)break;g.put(b.PAD1,8)}return b.createBytes(g,e)},b.createBytes=function(a,b){for(var c=0,d=0,e=0,g=new Array(b.length),h=new Array(b.length),j=0;j<b.length;j++){var k=b[j].dataCount,l=b[j].totalCount-k;d=Math.max(d,k),e=Math.max(e,l),g[j]=new Array(k);for(var m=0;m<g[j].length;m++)g[j][m]=255&a.buffer[m+c];c+=k;var n=f.getErrorCorrectPolynomial(l),o=new i(g[j],n.getLength()-1),p=o.mod(n);h[j]=new Array(n.getLength()-1);for(var m=0;m<h[j].length;m++){var q=m+p.getLength()-h[j].length;h[j][m]=q>=0?p.get(q):0}}for(var r=0,m=0;m<b.length;m++)r+=b[m].totalCount;for(var s=new Array(r),t=0,m=0;d>m;m++)for(var j=0;j<b.length;j++)m<g[j].length&&(s[t++]=g[j][m]);for(var m=0;e>m;m++)for(var j=0;j<b.length;j++)m<h[j].length&&(s[t++]=h[j][m]);return s};for(var c={MODE_NUMBER:1,MODE_ALPHA_NUM:2,MODE_8BIT_BYTE:4,MODE_KANJI:8},d={L:1,M:0,Q:3,H:2},e={PATTERN000:0,PATTERN001:1,PATTERN010:2,PATTERN011:3,PATTERN100:4,PATTERN101:5,PATTERN110:6,PATTERN111:7},f={PATTERN_POSITION_TABLE:[[],[6,18],[6,22],[6,26],[6,30],[6,34],[6,22,38],[6,24,42],[6,26,46],[6,28,50],[6,30,54],[6,32,58],[6,34,62],[6,26,46,66],[6,26,48,70],[6,26,50,74],[6,30,54,78],[6,30,56,82],[6,30,58,86],[6,34,62,90],[6,28,50,72,94],[6,26,50,74,98],[6,30,54,78,102],[6,28,54,80,106],[6,32,58,84,110],[6,30,58,86,114],[6,34,62,90,118],[6,26,50,74,98,122],[6,30,54,78,102,126],[6,26,52,78,104,130],[6,30,56,82,108,134],[6,34,60,86,112,138],[6,30,58,86,114,142],[6,34,62,90,118,146],[6,30,54,78,102,126,150],[6,24,50,76,102,128,154],[6,28,54,80,106,132,158],[6,32,58,84,110,136,162],[6,26,54,82,110,138,166],[6,30,58,86,114,142,170]],G15:1335,G18:7973,G15_MASK:21522,getBCHTypeInfo:function(a){for(var b=a<<10;f.getBCHDigit(b)-f.getBCHDigit(f.G15)>=0;)b^=f.G15<<f.getBCHDigit(b)-f.getBCHDigit(f.G15);return(a<<10|b)^f.G15_MASK},getBCHTypeNumber:function(a){for(var b=a<<12;f.getBCHDigit(b)-f.getBCHDigit(f.G18)>=0;)b^=f.G18<<f.getBCHDigit(b)-f.getBCHDigit(f.G18);return a<<12|b},getBCHDigit:function(a){for(var b=0;0!=a;)b++,a>>>=1;return b},getPatternPosition:function(a){return f.PATTERN_POSITION_TABLE[a-1]},getMask:function(a,b,c){switch(a){case e.PATTERN000:return 0==(b+c)%2;case e.PATTERN001:return 0==b%2;case e.PATTERN010:return 0==c%3;case e.PATTERN011:return 0==(b+c)%3;case e.PATTERN100:return 0==(Math.floor(b/2)+Math.floor(c/3))%2;case e.PATTERN101:return 0==b*c%2+b*c%3;case e.PATTERN110:return 0==(b*c%2+b*c%3)%2;case e.PATTERN111:return 0==(b*c%3+(b+c)%2)%2;default:throw new Error("bad maskPattern:"+a)}},getErrorCorrectPolynomial:function(a){for(var b=new i([1],0),c=0;a>c;c++)b=b.multiply(new i([1,g.gexp(c)],0));return b},getLengthInBits:function(a,b){if(b>=1&&10>b)switch(a){case c.MODE_NUMBER:return 10;case c.MODE_ALPHA_NUM:return 9;case c.MODE_8BIT_BYTE:return 8;case c.MODE_KANJI:return 8;default:throw new Error("mode:"+a)}else if(27>b)switch(a){case c.MODE_NUMBER:return 12;case c.MODE_ALPHA_NUM:return 11;case c.MODE_8BIT_BYTE:return 16;case c.MODE_KANJI:return 10;default:throw new Error("mode:"+a)}else{if(!(41>b))throw new Error("type:"+b);switch(a){case c.MODE_NUMBER:return 14;case c.MODE_ALPHA_NUM:return 13;case c.MODE_8BIT_BYTE:return 16;case c.MODE_KANJI:return 12;default:throw new Error("mode:"+a)}}},getLostPoint:function(a){for(var b=a.getModuleCount(),c=0,d=0;b>d;d++)for(var e=0;b>e;e++){for(var f=0,g=a.isDark(d,e),h=-1;1>=h;h++)if(!(0>d+h||d+h>=b))for(var i=-1;1>=i;i++)0>e+i||e+i>=b||(0!=h||0!=i)&&g==a.isDark(d+h,e+i)&&f++;f>5&&(c+=3+f-5)}for(var d=0;b-1>d;d++)for(var e=0;b-1>e;e++){var j=0;a.isDark(d,e)&&j++,a.isDark(d+1,e)&&j++,a.isDark(d,e+1)&&j++,a.isDark(d+1,e+1)&&j++,(0==j||4==j)&&(c+=3)}for(var d=0;b>d;d++)for(var e=0;b-6>e;e++)a.isDark(d,e)&&!a.isDark(d,e+1)&&a.isDark(d,e+2)&&a.isDark(d,e+3)&&a.isDark(d,e+4)&&!a.isDark(d,e+5)&&a.isDark(d,e+6)&&(c+=40);for(var e=0;b>e;e++)for(var d=0;b-6>d;d++)a.isDark(d,e)&&!a.isDark(d+1,e)&&a.isDark(d+2,e)&&a.isDark(d+3,e)&&a.isDark(d+4,e)&&!a.isDark(d+5,e)&&a.isDark(d+6,e)&&(c+=40);for(var k=0,e=0;b>e;e++)for(var d=0;b>d;d++)a.isDark(d,e)&&k++;var l=Math.abs(100*k/b/b-50)/5;return c+=10*l}},g={glog:function(a){if(1>a)throw new Error("glog("+a+")");return g.LOG_TABLE[a]},gexp:function(a){for(;0>a;)a+=255;for(;a>=256;)a-=255;return g.EXP_TABLE[a]},EXP_TABLE:new Array(256),LOG_TABLE:new Array(256)},h=0;8>h;h++)g.EXP_TABLE[h]=1<<h;for(var h=8;256>h;h++)g.EXP_TABLE[h]=g.EXP_TABLE[h-4]^g.EXP_TABLE[h-5]^g.EXP_TABLE[h-6]^g.EXP_TABLE[h-8];for(var h=0;255>h;h++)g.LOG_TABLE[g.EXP_TABLE[h]]=h;i.prototype={get:function(a){return this.num[a]},getLength:function(){return this.num.length},multiply:function(a){for(var b=new Array(this.getLength()+a.getLength()-1),c=0;c<this.getLength();c++)for(var d=0;d<a.getLength();d++)b[c+d]^=g.gexp(g.glog(this.get(c))+g.glog(a.get(d)));return new i(b,0)},mod:function(a){if(this.getLength()-a.getLength()<0)return this;for(var b=g.glog(this.get(0))-g.glog(a.get(0)),c=new Array(this.getLength()),d=0;d<this.getLength();d++)c[d]=this.get(d);for(var d=0;d<a.getLength();d++)c[d]^=g.gexp(g.glog(a.get(d))+b);return new i(c,0).mod(a)}},j.RS_BLOCK_TABLE=[[1,26,19],[1,26,16],[1,26,13],[1,26,9],[1,44,34],[1,44,28],[1,44,22],[1,44,16],[1,70,55],[1,70,44],[2,35,17],[2,35,13],[1,100,80],[2,50,32],[2,50,24],[4,25,9],[1,134,108],[2,67,43],[2,33,15,2,34,16],[2,33,11,2,34,12],[2,86,68],[4,43,27],[4,43,19],[4,43,15],[2,98,78],[4,49,31],[2,32,14,4,33,15],[4,39,13,1,40,14],[2,121,97],[2,60,38,2,61,39],[4,40,18,2,41,19],[4,40,14,2,41,15],[2,146,116],[3,58,36,2,59,37],[4,36,16,4,37,17],[4,36,12,4,37,13],[2,86,68,2,87,69],[4,69,43,1,70,44],[6,43,19,2,44,20],[6,43,15,2,44,16],[4,101,81],[1,80,50,4,81,51],[4,50,22,4,51,23],[3,36,12,8,37,13],[2,116,92,2,117,93],[6,58,36,2,59,37],[4,46,20,6,47,21],[7,42,14,4,43,15],[4,133,107],[8,59,37,1,60,38],[8,44,20,4,45,21],[12,33,11,4,34,12],[3,145,115,1,146,116],[4,64,40,5,65,41],[11,36,16,5,37,17],[11,36,12,5,37,13],[5,109,87,1,110,88],[5,65,41,5,66,42],[5,54,24,7,55,25],[11,36,12],[5,122,98,1,123,99],[7,73,45,3,74,46],[15,43,19,2,44,20],[3,45,15,13,46,16],[1,135,107,5,136,108],[10,74,46,1,75,47],[1,50,22,15,51,23],[2,42,14,17,43,15],[5,150,120,1,151,121],[9,69,43,4,70,44],[17,50,22,1,51,23],[2,42,14,19,43,15],[3,141,113,4,142,114],[3,70,44,11,71,45],[17,47,21,4,48,22],[9,39,13,16,40,14],[3,135,107,5,136,108],[3,67,41,13,68,42],[15,54,24,5,55,25],[15,43,15,10,44,16],[4,144,116,4,145,117],[17,68,42],[17,50,22,6,51,23],[19,46,16,6,47,17],[2,139,111,7,140,112],[17,74,46],[7,54,24,16,55,25],[34,37,13],[4,151,121,5,152,122],[4,75,47,14,76,48],[11,54,24,14,55,25],[16,45,15,14,46,16],[6,147,117,4,148,118],[6,73,45,14,74,46],[11,54,24,16,55,25],[30,46,16,2,47,17],[8,132,106,4,133,107],[8,75,47,13,76,48],[7,54,24,22,55,25],[22,45,15,13,46,16],[10,142,114,2,143,115],[19,74,46,4,75,47],[28,50,22,6,51,23],[33,46,16,4,47,17],[8,152,122,4,153,123],[22,73,45,3,74,46],[8,53,23,26,54,24],[12,45,15,28,46,16],[3,147,117,10,148,118],[3,73,45,23,74,46],[4,54,24,31,55,25],[11,45,15,31,46,16],[7,146,116,7,147,117],[21,73,45,7,74,46],[1,53,23,37,54,24],[19,45,15,26,46,16],[5,145,115,10,146,116],[19,75,47,10,76,48],[15,54,24,25,55,25],[23,45,15,25,46,16],[13,145,115,3,146,116],[2,74,46,29,75,47],[42,54,24,1,55,25],[23,45,15,28,46,16],[17,145,115],[10,74,46,23,75,47],[10,54,24,35,55,25],[19,45,15,35,46,16],[17,145,115,1,146,116],[14,74,46,21,75,47],[29,54,24,19,55,25],[11,45,15,46,46,16],[13,145,115,6,146,116],[14,74,46,23,75,47],[44,54,24,7,55,25],[59,46,16,1,47,17],[12,151,121,7,152,122],[12,75,47,26,76,48],[39,54,24,14,55,25],[22,45,15,41,46,16],[6,151,121,14,152,122],[6,75,47,34,76,48],[46,54,24,10,55,25],[2,45,15,64,46,16],[17,152,122,4,153,123],[29,74,46,14,75,47],[49,54,24,10,55,25],[24,45,15,46,46,16],[4,152,122,18,153,123],[13,74,46,32,75,47],[48,54,24,14,55,25],[42,45,15,32,46,16],[20,147,117,4,148,118],[40,75,47,7,76,48],[43,54,24,22,55,25],[10,45,15,67,46,16],[19,148,118,6,149,119],[18,75,47,31,76,48],[34,54,24,34,55,25],[20,45,15,61,46,16]],j.getRSBlocks=function(a,b){var c=j.getRsBlockTable(a,b);if(void 0==c)throw new Error("bad rs block @ typeNumber:"+a+"/errorCorrectLevel:"+b);for(var d=c.length/3,e=[],f=0;d>f;f++)for(var g=c[3*f+0],h=c[3*f+1],i=c[3*f+2],k=0;g>k;k++)e.push(new j(h,i));return e},j.getRsBlockTable=function(a,b){switch(b){case d.L:return j.RS_BLOCK_TABLE[4*(a-1)+0];case d.M:return j.RS_BLOCK_TABLE[4*(a-1)+1];case d.Q:return j.RS_BLOCK_TABLE[4*(a-1)+2];case d.H:return j.RS_BLOCK_TABLE[4*(a-1)+3];default:return void 0}},k.prototype={get:function(a){var b=Math.floor(a/8);return 1==(1&this.buffer[b]>>>7-a%8)},put:function(a,b){for(var c=0;b>c;c++)this.putBit(1==(1&a>>>b-c-1))},getLengthInBits:function(){return this.length},putBit:function(a){var b=Math.floor(this.length/8);this.buffer.length<=b&&this.buffer.push(0),a&&(this.buffer[b]|=128>>>this.length%8),this.length++}};var l=[[17,14,11,7],[32,26,20,14],[53,42,32,24],[78,62,46,34],[106,84,60,44],[134,106,74,58],[154,122,86,64],[192,152,108,84],[230,180,130,98],[271,213,151,119],[321,251,177,137],[367,287,203,155],[425,331,241,177],[458,362,258,194],[520,412,292,220],[586,450,322,250],[644,504,364,280],[718,560,394,310],[792,624,442,338],[858,666,482,382],[929,711,509,403],[1003,779,565,439],[1091,857,611,461],[1171,911,661,511],[1273,997,715,535],[1367,1059,751,593],[1465,1125,805,625],[1528,1190,868,658],[1628,1264,908,698],[1732,1370,982,742],[1840,1452,1030,790],[1952,1538,1112,842],[2068,1628,1168,898],[2188,1722,1228,958],[2303,1809,1283,983],[2431,1911,1351,1051],[2563,1989,1423,1093],[2699,2099,1499,1139],[2809,2213,1579,1219],[2953,2331,1663,1273]],o=function(){var a=function(a,b){this._el=a,this._htOption=b};return a.prototype.draw=function(a){function g(a,b){var c=document.createElementNS("http://www.w3.org/2000/svg",a);for(var d in b)b.hasOwnProperty(d)&&c.setAttribute(d,b[d]);return c}var b=this._htOption,c=this._el,d=a.getModuleCount();Math.floor(b.width/d),Math.floor(b.height/d),this.clear();var h=g("svg",{viewBox:"0 0 "+String(d)+" "+String(d),width:"100%",height:"100%",fill:b.colorLight});h.setAttributeNS("http://www.w3.org/2000/xmlns/","xmlns:xlink","http://www.w3.org/1999/xlink"),c.appendChild(h),h.appendChild(g("rect",{fill:b.colorDark,width:"1",height:"1",id:"template"}));for(var i=0;d>i;i++)for(var j=0;d>j;j++)if(a.isDark(i,j)){var k=g("use",{x:String(i),y:String(j)});k.setAttributeNS("http://www.w3.org/1999/xlink","href","#template"),h.appendChild(k)}},a.prototype.clear=function(){for(;this._el.hasChildNodes();)this._el.removeChild(this._el.lastChild)},a}(),p="svg"===document.documentElement.tagName.toLowerCase(),q=p?o:m()?function(){function a(){this._elImage.src=this._elCanvas.toDataURL("image/png"),this._elImage.style.display="block",this._elCanvas.style.display="none"}function d(a,b){var c=this;if(c._fFail=b,c._fSuccess=a,null===c._bSupportDataURI){var d=document.createElement("img"),e=function(){c._bSupportDataURI=!1,c._fFail&&_fFail.call(c)},f=function(){c._bSupportDataURI=!0,c._fSuccess&&c._fSuccess.call(c)};return d.onabort=e,d.onerror=e,d.onload=f,d.src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==",void 0}c._bSupportDataURI===!0&&c._fSuccess?c._fSuccess.call(c):c._bSupportDataURI===!1&&c._fFail&&c._fFail.call(c)}if(this._android&&this._android<=2.1){var b=1/window.devicePixelRatio,c=CanvasRenderingContext2D.prototype.drawImage;CanvasRenderingContext2D.prototype.drawImage=function(a,d,e,f,g,h,i,j){if("nodeName"in a&&/img/i.test(a.nodeName))for(var l=arguments.length-1;l>=1;l--)arguments[l]=arguments[l]*b;else"undefined"==typeof j&&(arguments[1]*=b,arguments[2]*=b,arguments[3]*=b,arguments[4]*=b);c.apply(this,arguments)}}var e=function(a,b){this._bIsPainted=!1,this._android=n(),this._htOption=b,this._elCanvas=document.createElement("canvas"),this._elCanvas.width=b.width,this._elCanvas.height=b.height,a.appendChild(this._elCanvas),this._el=a,this._oContext=this._elCanvas.getContext("2d"),this._bIsPainted=!1,this._elImage=document.createElement("img"),this._elImage.style.display="none",this._el.appendChild(this._elImage),this._bSupportDataURI=null};return e.prototype.draw=function(a){var b=this._elImage,c=this._oContext,d=this._htOption,e=a.getModuleCount(),f=d.width/e,g=d.height/e,h=Math.round(f),i=Math.round(g);b.style.display="none",this.clear();for(var j=0;e>j;j++)for(var k=0;e>k;k++){var l=a.isDark(j,k),m=k*f,n=j*g;c.strokeStyle=l?d.colorDark:d.colorLight,c.lineWidth=1,c.fillStyle=l?d.colorDark:d.colorLight,c.fillRect(m,n,f,g),c.strokeRect(Math.floor(m)+.5,Math.floor(n)+.5,h,i),c.strokeRect(Math.ceil(m)-.5,Math.ceil(n)-.5,h,i)}this._bIsPainted=!0},e.prototype.makeImage=function(){this._bIsPainted&&d.call(this,a)},e.prototype.isPainted=function(){return this._bIsPainted},e.prototype.clear=function(){this._oContext.clearRect(0,0,this._elCanvas.width,this._elCanvas.height),this._bIsPainted=!1},e.prototype.round=function(a){return a?Math.floor(1e3*a)/1e3:a},e}():function(){var a=function(a,b){this._el=a,this._htOption=b};return a.prototype.draw=function(a){for(var b=this._htOption,c=this._el,d=a.getModuleCount(),e=Math.floor(b.width/d),f=Math.floor(b.height/d),g=['<table style="border:0;border-collapse:collapse;">'],h=0;d>h;h++){g.push("<tr>");for(var i=0;d>i;i++)g.push('<td style="border:0;border-collapse:collapse;padding:0;margin:0;width:'+e+"px;height:"+f+"px;background-color:"+(a.isDark(h,i)?b.colorDark:b.colorLight)+';"></td>');g.push("</tr>")}g.push("</table>"),c.innerHTML=g.join("");var j=c.childNodes[0],k=(b.width-j.offsetWidth)/2,l=(b.height-j.offsetHeight)/2;k>0&&l>0&&(j.style.margin=l+"px "+k+"px")},a.prototype.clear=function(){this._el.innerHTML=""},a}();QRCode=function(a,b){if(this._htOption={width:400,height:400,typeNumber:4,colorDark:"#004400",colorLight:"#eeffee",correctLevel:d.H},"string"==typeof b&&(b={text:b}),b)for(var c in b)this._htOption[c]=b[c];"string"==typeof a&&(a=document.getElementById(a)),this._android=n(),this._el=a,this._oQRCode=null,this._oDrawing=new q(this._el,this._htOption),this._htOption.text&&this.makeCode(this._htOption.text)},QRCode.prototype.makeCode=function(a){this._oQRCode=new b(r(a,this._htOption.correctLevel),this._htOption.correctLevel),this._oQRCode.addData(a),this._oQRCode.make(),this._el.title=a,this._oDrawing.draw(this._oQRCode),this.makeImage()},QRCode.prototype.makeImage=function(){"function"==typeof this._oDrawing.makeImage&&(!this._android||this._android>=3)&&this._oDrawing.makeImage()},QRCode.prototype.clear=function(){this._oDrawing.clear()},QRCode.CorrectLevel=d}();
 
 ;(function(root, undefined) {
   'use strict';
@@ -3635,8 +3361,8 @@ var QRCode;!function(){function a(a){this.mode=c.MODE_8BIT_BYTE,this.data=a,this
   var PADDING = [6, 1536, 393216, 100663296];
   var SHIFT = [0, 8, 16, 24];
   var RC = [1, 0, 32898, 0, 32906, 2147483648, 2147516416, 2147483648, 32907, 0, 2147483649,
-            0, 2147516545, 2147483648, 32777, 2147483648, 138, 0, 136, 0, 2147516425, 0, 
-            2147483658, 0, 2147516555, 0, 139, 2147483648, 32905, 2147483648, 32771, 
+            0, 2147516545, 2147483648, 32777, 2147483648, 138, 0, 136, 0, 2147516425, 0,
+            2147483658, 0, 2147516555, 0, 139, 2147483648, 32905, 2147483648, 32771,
             2147483648, 32770, 2147483648, 128, 2147483648, 32778, 0, 2147483658, 2147483648,
             2147516545, 2147483648, 32896, 2147483648, 2147483649, 0, 2147516424, 2147483648];
   var BITS = [224, 256, 384, 512];
@@ -3726,9 +3452,9 @@ var QRCode;!function(){function a(a){this.mode=c.MODE_8BIT_BYTE,this.data=a,this
     if(notString && message.constructor == root.ArrayBuffer) {
       message = new Uint8Array(message);
     }
-    var length = message.length, blocks = this.blocks, byteCount = this.byteCount, 
+    var length = message.length, blocks = this.blocks, byteCount = this.byteCount,
         blockCount = this.blockCount, index = 0, s = this.s, i, code;
-    
+
     while(index < length) {
       if(this.reset) {
         this.reset = false;
@@ -3797,7 +3523,7 @@ var QRCode;!function(){function a(a){this.mode=c.MODE_8BIT_BYTE,this.data=a,this
   Keccak.prototype.toString = Keccak.prototype.hex = function() {
     this.finalize();
 
-    var blockCount = this.blockCount, s = this.s, outputBlocks = this.outputBlocks, 
+    var blockCount = this.blockCount, s = this.s, outputBlocks = this.outputBlocks,
         extraBytes = this.extraBytes, i = 0, j = 0;
     var hex = '', block;
     while(j < outputBlocks) {
@@ -3830,7 +3556,7 @@ var QRCode;!function(){function a(a){this.mode=c.MODE_8BIT_BYTE,this.data=a,this
   Keccak.prototype.buffer = function() {
     this.finalize();
 
-    var blockCount = this.blockCount, s = this.s, outputBlocks = this.outputBlocks, 
+    var blockCount = this.blockCount, s = this.s, outputBlocks = this.outputBlocks,
         extraBytes = this.extraBytes, i = 0, j = 0;
     var bytes = this.outputBits >> 3;
     var buffer;
@@ -3858,7 +3584,7 @@ var QRCode;!function(){function a(a){this.mode=c.MODE_8BIT_BYTE,this.data=a,this
   Keccak.prototype.digest = Keccak.prototype.array = function() {
     this.finalize();
 
-    var blockCount = this.blockCount, s = this.s, outputBlocks = this.outputBlocks, 
+    var blockCount = this.blockCount, s = this.s, outputBlocks = this.outputBlocks,
         extraBytes = this.extraBytes, i = 0, j = 0;
     var array = [], offset, block;
     while(j < outputBlocks) {
@@ -3891,9 +3617,9 @@ var QRCode;!function(){function a(a){this.mode=c.MODE_8BIT_BYTE,this.data=a,this
   };
 
   var f = function(s) {
-    var h, l, n, c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, 
-        b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16, b17, 
-        b18, b19, b20, b21, b22, b23, b24, b25, b26, b27, b28, b29, b30, b31, b32, b33, 
+    var h, l, n, c0, c1, c2, c3, c4, c5, c6, c7, c8, c9,
+        b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16, b17,
+        b18, b19, b20, b21, b22, b23, b24, b25, b26, b27, b28, b29, b30, b31, b32, b33,
         b34, b35, b36, b37, b38, b39, b40, b41, b42, b43, b44, b45, b46, b47, b48, b49;
     for(n = 0; n < 48; n += 2) {
       c0 = s[0] ^ s[10] ^ s[20] ^ s[30] ^ s[40];
@@ -4084,8 +3810,6 @@ var QRCode;!function(){function a(a){this.mode=c.MODE_8BIT_BYTE,this.data=a,this
   }
 }(this));
 
-</script>
-<script>
 /*
 CryptoJS v3.1.2
 code.google.com/p/crypto-js
@@ -4102,386 +3826,13 @@ d)).finalize(c)}}});var w=f.algo={};return f}(Math);
 (function(h){for(var s=CryptoJS,f=s.lib,t=f.WordArray,g=f.Hasher,f=s.algo,j=[],q=[],v=function(a){return 4294967296*(a-(a|0))|0},u=2,k=0;64>k;){var l;a:{l=u;for(var x=h.sqrt(l),w=2;w<=x;w++)if(!(l%w)){l=!1;break a}l=!0}l&&(8>k&&(j[k]=v(h.pow(u,0.5))),q[k]=v(h.pow(u,1/3)),k++);u++}var a=[],f=f.SHA256=g.extend({_doReset:function(){this._hash=new t.init(j.slice(0))},_doProcessBlock:function(c,d){for(var b=this._hash.words,e=b[0],f=b[1],m=b[2],h=b[3],p=b[4],j=b[5],k=b[6],l=b[7],n=0;64>n;n++){if(16>n)a[n]=
 c[d+n]|0;else{var r=a[n-15],g=a[n-2];a[n]=((r<<25|r>>>7)^(r<<14|r>>>18)^r>>>3)+a[n-7]+((g<<15|g>>>17)^(g<<13|g>>>19)^g>>>10)+a[n-16]}r=l+((p<<26|p>>>6)^(p<<21|p>>>11)^(p<<7|p>>>25))+(p&j^~p&k)+q[n]+a[n];g=((e<<30|e>>>2)^(e<<19|e>>>13)^(e<<10|e>>>22))+(e&f^e&m^f&m);l=k;k=j;j=p;p=h+r|0;h=m;m=f;f=e;e=r+g|0}b[0]=b[0]+e|0;b[1]=b[1]+f|0;b[2]=b[2]+m|0;b[3]=b[3]+h|0;b[4]=b[4]+p|0;b[5]=b[5]+j|0;b[6]=b[6]+k|0;b[7]=b[7]+l|0},_doFinalize:function(){var a=this._data,d=a.words,b=8*this._nDataBytes,e=8*a.sigBytes;
 d[e>>>5]|=128<<24-e%32;d[(e+64>>>9<<4)+14]=h.floor(b/4294967296);d[(e+64>>>9<<4)+15]=b;a.sigBytes=4*d.length;this._process();return this._hash},clone:function(){var a=g.clone.call(this);a._hash=this._hash.clone();return a}});s.SHA256=g._createHelper(f);s.HmacSHA256=g._createHmacHelper(f)})(Math);
-</script>
-<style type="text/css">
-html { font-family: sans-serif }
-.private { background-color: #FF8080 }
-.public { background-color: #80FF80 }
-.qrcode {
-  position: fixed;
-  background: none repeat #FFF;
-  top: 50%; left: 50%;
-  width: 312px; height: 312px;
-  margin: -128px 0px 0px -128px;
-  padding: 24px;
-  border: 2px solid;
-  box-shadow: 0px 0px 10px rgba(0,0,0,0.25);
-  z-index: 1007;
-  display: none;
-}
-
-#coinIcon{
-	text-transform: capitalize;
-	width: 1.3em;
-	height: 1.3em;
-	line-height: 1.2em;
-	display: inline-block;
-	vertical-align: middle;
-	color: #15315e;
-	border: 2px solid #15315e;
-	border-radius: 50%;
-	text-align: center;
-	margin-top: 0px;
-}
-</style>
-
-<nav class="grey lighten-3">
-    <div class="nav-wrapper">
-        <a href="#" class="brand-logo center">
-			<span id="coinIcon">&#1180;</span> Карбованець
-        </a>
-
-    </div>
-</nav>
-
-<div class="row">&nbsp;</div>
-<div class="row center-align">
-    <div class="col s12">
-        <h4 style="color: #555;">Offline wallet generator</h4>
-    </div>
-</div>
 
 
-    <div class="row">
-        <div class="col s12">
-            <p>
-                This page generates a new <a href="http://karbowanec.com/">Karbowanec</a> wallet. It is self contained and
-                does all the necessary calculations locally, so is suitable for generating a new wallet on a machine
-                that is not connected to the network, and may even never be. This way, you can create
-                a Karbowanec wallet without risking the keys.
-            </p>
-        </div>
-    </div>
-    <div class="row valign-wrapper">
-        <div class="col s4 right-align ">
-                <input class="btn orange" type="button" onclick="js:genwallet(null);"
-                       value="Generate wallet" action=""/>
-                <p>Custom entropy (leave empty to use PRNG)</p>
-                <input type="text" value="" id="user_entropy_widget" />
-        </div>
-        <div class="col s1 offset-s1"><h4>or</h4></div>
-        <div class="col s5 offset-s1">
-            <form>
-                <input class="btn deep-orange" type="button" onclick="js:genwallet_prefix();" value="Generate wallet with prefix" action="" id="gen_prefix_widget"/>
-                <p>(very slow for more than a few characters)</p>
-                <input type="text" value="K" id="prefix_widget" oninput="js:check_prefix_validity()"; />
-            </form>
-        </div>
-    </div>
-    <div class="row center-align">
-        <div class="col s12">
-            <form>
-                <input class="waves-effect waves-light btn" type="button" onclick="js:genwallet('english');" value="English" action=""/>
-                <input class="waves-effect waves-light btn" type="button" onclick="js:genwallet('spanish');" value="Spanish" action=""/>
-                <!-- portuguese word list has a few prefix collisions
-                    <input class="waves-effect waves-light btn" type="button" onclick="js:genwallet('portuguese');" value="Portuguese" action=""/>
-                -->
-                <input class="waves-effect waves-light btn" type="button" onclick="js:genwallet('japanese');" value="Japanese" action=""/>
-            </form>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col s12">
-            <div class="card light-green lighten-5">
-                <div class="card-content light-green-text text-darken-4">
-                    <span class="card-title light-green-text text-darken-4">
-                      Public address
-                      <input type="button" class="waves-effect waves-light btn" onclick="js:toggle_qr();" value="Show QR code" action=""
-                         style="line-height: 25px; height: 25px; font-size: 60%; padding: 0px 1.5rem;"/>
-                    </span>
-
-                    <p>This is the address you give to third parties to send Karbo to you.
-                        <br><b>It is the only information here that's meant to be public.</b>
-                    </p>
-                </div>
-                <div class="card-action center-align">
-                    <pre class="center-align" id="address_widget">generating...</pre>
-                    <span class="qrcode" id="address_qr_widget" onclick="js:toggle_qr();"></span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col s12">
-            <div class="card pink lighten-5">
-                <div class="card-content pink-text text-darken-5">
-                    <span class="card-title pink-text text-darken-5">Mnemonic seed</span>
-                    <p>
-                        The mnemonic seed is a string that comprises 25 words and allows you to recreate your
-                        private keys. <b>Keep it secure!</b>
-                    </p>
-					<p>
-						To restore keys from mnemonic seed use Restore tab in Karbowanec paperwallet at <a href="http://paperwallet.karbowanec.com/">paperwallet.karbowanec.com</a>.
-					</p>
-                </div>
-                <div class="card-action center-align">
-                    <h5 class="grey-text text-darken-4" id="mnemonic_widget">Generating... </h5>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col s12">
-            <div class="card indigo lighten-5">
-                <div class="card-content indigo-text text-darken-4">
-                    <span class="card-title indigo-text text-darken-4">Private keys</span>
-
-                    <p>
-                        The spend key and view key are the raw private keys for the
-                        new wallet.
-                        
-						<strong>Keys for GUI Wallet</strong> can be imported into wallet in File > Import private key
-						
-                    </p>
-                    <br>
-                    <table>
-                        <tbody>
-                        <tr>
-                            <td><pre>Spend key:</pre></td>
-                            <td><pre id="spend_key_widget">Generating...</pre></td>
-                        </tr>
-                        <tr>
-                            <td><pre>View key:</pre></td>
-                            <td><pre id="view_key_widget">Generating...</pre></td>
-                        </tr>
-						
-						<tr>
-                            <td><pre>Keys for GUI Wallet:</pre></td>
-                            <td><pre id="wallet_keys_widget">Generating...</pre></td>
-                        </tr>
-						
-						
-						
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-<div class="row">&nbsp;</div>
-<footer class="page-footer grey lighten-3 grey-text text-darken-4">
-    <div class="container">
-        <div class="row">
-            <div class="col l12">
-                <h5>Credits</h5>
-                <p>
-                    Made by moneromooo, based on code from <a href="https://mymonero.com/">MyMonero</a>. Adapted for Karbovanets by Aiw&euml;. Copyright notices in the source.
-                    <br>
-                    Thanks to antanst for the CSS, and to luigi1111 for crypto fixes and improvements.
-                    <br>
-                    If you found this useful, a donation would be appreciated:
-                    <br>
-                <pre>4AfUP827TeRZ1cck3tZThgZbRCEwBrpcJTkA1LCiyFVuMH4b5y59bKMZHGb9y58K3gSjWDCBsB4RkGsGDhsmMG5R2qmbLeW</pre>
-				
-				<pre>KawA9rnrZpTBDXhu5xKrZv7aKnFM4CgX1YxqkRo4k5tVUxMB2yCwhA3eEw7EivcMkChyWF7CwexLjAr5MzJAEDzaLvx2dK1</pre>
-
-                </p>
-
-
-			</div>
-        </div>
-    </div>
-</footer>
-
-<script>
-function poor_mans_kdf(str)
-{
+function poor_mans_kdf(str) {
   var hex = cnBase58.bintohex(cnBase58.strtobin(str));
-  for (var n = 0; n < 10000; ++n)
+  for (var n = 0; n < 10000; ++n) {
     hex = keccak_256(cnBase58.hextobin(hex));
+  }
   return hex;
-}
-current_lang='english';
-keys = null;
-function genwallet(lang)
-{
-  spend_key_widget = document.getElementById("spend_key_widget");
-  view_key_widget = document.getElementById("view_key_widget");
-  wallet_keys_widget = document.getElementById("wallet_keys_widget");
-  address_widget = document.getElementById("address_widget");
-  address_qr_widget = document.getElementById("address_qr_widget");
-  mnemonic_widget = document.getElementById("mnemonic_widget");
-  user_entropy_widget = document.getElementById("user_entropy_widget")
+};
 
-  this.getStringWords = function(string) {
-    return string.replace(/^\s*(.*)\s*$/, '$1').replace(/\s+/, ' ').split(' ');
-  };
-  
-  if (lang!=null) {
-    current_lang = lang;
-  }
-  else {
-    var user_entropy = user_entropy_widget.value;
-    if (user_entropy === "") {
-      seed = cnUtil.sc_reduce32(cnUtil.rand_32());
-	}
-    else {
-      seed = cnUtil.sc_reduce32(poor_mans_kdf(user_entropy));
-    }
-	var passPhrase = mn_encode(seed,current_lang);
-	var words = getStringWords(passPhrase);
-	seed = CryptoJS.SHA256(salt + words.join(' ')).toString();
-    keys = cnUtil.create_address(seed);
-  }
-  mnemonic = passPhrase;
- 
-  spend_key_widget.innerHTML = keys.spend.sec;
-  view_key_widget.innerHTML = keys.view.sec;
-  wallet_keys_widget.innerHTML = keys.privateKeys;
-  address_widget.innerHTML = keys.public_addr;
-  address_qr_widget.innerHTML = "";
-  mnemonic_widget.innerHTML = mnemonic;
-
-  qr=new QRCode(address_qr_widget, {correctLevel:QRCode.CorrectLevel.L});
-  qr.makeCode("karbowanec:"+keys.public_addr);
-}
-
-previous_button_text = "";
-prefix = "";
-function genwallet_prefix_worker()
-{
-  attempts = 0;
-  while (true) {
-    attempts++;
-    seed = cnUtil.sc_reduce32(cnUtil.rand_32());
-	var passPhrase = mn_encode(seed,current_lang);
-	var words = getStringWords(passPhrase);
-	seed = CryptoJS.SHA256(salt + words.join(' ')).toString();
-    keys = cnUtil.create_address_if_prefix(seed,prefix);
-    if (keys != null) {
-      gen_prefix_widget = document.getElementById("gen_prefix_widget");
-      prefix_widget = document.getElementById("prefix_widget");
-      gen_prefix_widget.value = previous_button_text;
-      prefix_widget.disabled = false;
-      generating = false;
-      break;
-    }
-    if (attempts == 10) {
-      if (generating)
-        setTimeout(genwallet_prefix_worker, 0);
-      return;
-    }
-  }
-  mnemonic = passPhrase;
-
-  spend_key_widget = document.getElementById("spend_key_widget");
-  view_key_widget = document.getElementById("view_key_widget");
-  address_widget = document.getElementById("address_widget");
-  mnemonic_widget = document.getElementById("mnemonic_widget");
-
-  spend_key_widget.innerHTML = keys.spend.sec;
-  view_key_widget.innerHTML = keys.view.sec;
-  address_widget.innerHTML = keys.public_addr;
-  address_qr_widget.innerHTML = "";
-  mnemonic_widget.innerHTML = mnemonic;
-
-  wallet_keys_widget.innerHTML = keys.privateKeys;
-  
-  qr=new QRCode(address_qr_widget, {correctLevel:QRCode.CorrectLevel.L});
-  qr.makeCode("karbowanec:"+keys.public_addr);
-}
-
-var zerohex="0000000000000000000000000000000000000000000000000000000000000000";
-var ffhex="ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff";
-var lowest_address=cnUtil.pubkeys_to_string(zerohex,zerohex);
-var highest_address=cnUtil.pubkeys_to_string(ffhex,ffhex);
-
-function is_valid_prefix(prefix)
-{
-  if (prefix.length <= 0 || prefix.length >= 95)
-    return false;
-  var lowest=lowest_address.substr(0,prefix.length);
-  var highest=highest_address.substr(0,prefix.length);
-  if (prefix<lowest)
-    return false;
-  if (prefix>highest)
-    return false;
-  return true;
-}
-
-function check_prefix_validity()
-{
-  gen_prefix_widget = document.getElementById("gen_prefix_widget");
-  prefix_widget = document.getElementById("prefix_widget");
-  if (gen_prefix_widget.value == "STOP")
-    return;
-  prefix=prefix_widget.value;
-  if (is_valid_prefix(prefix)) {
-    gen_prefix_widget.value = "Generate wallet with prefix";
-    gen_prefix_widget.disabled = false;
-  }
-  else {
-    gen_prefix_widget.value = "Invalid prefix";
-    gen_prefix_widget.disabled = true;
-  }
-}
-
-generating = false;
-function genwallet_prefix()
-{
-  gen_prefix_widget = document.getElementById("gen_prefix_widget");
-  prefix_widget = document.getElementById("prefix_widget");
-  if (generating) {
-    generating = false;
-    gen_prefix_widget.value = previous_button_text;
-    prefix_widget.disabled = false;
-  }
-  else {
-    prefix_widget = document.getElementById("prefix_widget");
-    prefix = prefix_widget.value;
-    prefix.trim();
-    if (prefix.length < 2 || prefix[0] != "K") {
-      alert("Bad prefix "+prefix+" should start with K and be at least one extra character");
-      return;
-    }
-    if (!is_valid_prefix(prefix)) {
-      alert("Bad prefix "+prefix+" is not a valid address prefix");
-      return;
-    }
-
-    generating = true;
-    previous_button_text = gen_prefix_widget.value;
-    gen_prefix_widget.value = "STOP";
-    prefix_widget.disabled = true;
-    setTimeout(genwallet_prefix_worker, 0);
-  }
-}
-
-function toggle_qr()
-{
-  address_qr_widget = document.getElementById("address_qr_widget");
-  spend_key_widget = document.getElementById("spend_key_widget");
-  view_key_widget = document.getElementById("view_key_widget");
-  mnemonic_widget = document.getElementById("mnemonic_widget");
-  if (address_qr_widget.style.display=="block") {
-    address_qr_widget.style.display="none";
-    spend_key_widget.style.display = "block";
-    view_key_widget.style.display = "block";
-    mnemonic_widget.style.display = "block";
-  }
-  else {
-    address_qr_widget.style.display="block";
-    spend_key_widget.style.display = "none";
-    view_key_widget.style.display = "none";
-    mnemonic_widget.style.display = "none";
-  }
-}
-
-genwallet();
-</script>
-
-</body>
-</html>
